@@ -1,0 +1,35 @@
+{
+  "name": "Auto cooking",
+  "version": "0.1.0",
+  "description": "Auto cooking",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["https://play.pixels.xyz/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://play.pixels.xyz/*"],
+      "js": ["contentScript.js"],
+      "css": ["popup.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/cooking.png"
+      ],
+      "matches": ["https://play.pixels.xyz/*"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/ext-icon.png",
+      "24": "assets/ext-icon.png",
+      "32": "assets/ext-icon.png"
+    },
+    "default_title": "Auto cooking",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 3
+}

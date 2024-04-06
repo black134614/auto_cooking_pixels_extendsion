@@ -1,0 +1,31 @@
+.toogle-btn.auto-water {
+  position: fixed;
+  z-index: 9;
+  left: 20px;
+  top: 25vh;
+  cursor: pointer;
+  padding: 5px;
+  height: 40px;
+  background-color: cornflowerblue;
+  border-radius: 0.5rem;
+}
+
+.toogle-btn.auto-water img {
+  width: 60px;
+  height: 30px;
+  border-radius: 0.5rem;
+}
+
+.toogle-btn.auto-water.auto-on {
+  background-color: red;
+}
+
+.auto-input-loop {
+  font-size: 10px;
+  text-align: right;
+  width: auto;
+  border-radius: 0.25rem;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 5px;
+}
