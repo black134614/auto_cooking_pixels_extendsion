@@ -32,6 +32,16 @@
         }
     }
 
+    async function clickContinuouslyForTwoSeconds() {
+        let startTime = Date.now();
+        let endTime = startTime + 2000; // 2 seconds
+        while (Date.now() < endTime) {
+            let randomDelay = Math.floor(Math.random() * 51) + 50; // Random delay between 50ms and 100ms
+            await new Promise(resolve => setTimeout(resolve, randomDelay));
+            clickCraftingButton();
+        }
+    }
+
     async function clickCloseCraftingButton() {
         const craftingButton = document.querySelector('.Crafting_craftingCloseButton__ZbHQF');
         if (craftingButton) {
@@ -45,12 +55,7 @@
             const craftingButton = document.querySelector('.Crafting_craftingButton__Qd6Ke');
             if (craftingButton && !craftingButton.disabled && craftingButton.textContent === "Create") {
                 console.log("tao banh");
-                await clickCraftingButton();
-                await sleep(400)
-                while (!craftingButton.disabled)
-                {
-                    await clickCraftingButton();
-                }
+                await clickContinuouslyForTwoSeconds();
                 // ramdom_out = getRandomInt(4, 6) * 1000
                 // await sleep(ramdom_out);
                 // await clickCloseCraftingButton()
