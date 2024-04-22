@@ -39,55 +39,31 @@
         }
     }
 
-    async function startAuto(wrapper, loop = 0, watingTime) {
+    async function startAuto(wrapper, watingTime) {
         let count = 0
-        if (!loop || loop === '' || loop === 0) {
-            while (!stopProcessing) {
-                const craftingButton = document.querySelector('.Crafting_craftingButton__Qd6Ke');
-                if (craftingButton && !craftingButton.disabled && craftingButton.textContent === "Create") {
-                    console.log("tao banh");
-                    await clickCraftingButton();
-                    ramdom_out = getRandomInt(4, 6) * 1000
-                    await sleep(ramdom_out);
-                    await clickCloseCraftingButton()
-                    console.log("doi ", watingTime - ramdom_out + "ms");
-                    await sleep(watingTime - ramdom_out);
-                    console.log("hoan thanh");
-                    count++
-                    document.title = `Đã chế tạo ${count} lần`;
-                }
-                if (craftingButton && !craftingButton.disabled && craftingButton.textContent === "Collect") {
-                    await clickCraftingButton()
-                }
-                await sleep(200);
+        while (!stopProcessing) {
+            const craftingButton = document.querySelector('.Crafting_craftingButton__Qd6Ke');
+            if (craftingButton && !craftingButton.disabled && craftingButton.textContent === "Create") {
+                console.log("tao banh");
+                await clickCraftingButton();
+                ramdom_out = getRandomInt(4, 6) * 1000
+                await sleep(ramdom_out);
+                // await clickCloseCraftingButton()
+                console.log("doi ", watingTime - ramdom_out + "ms");
+                await sleep(watingTime - ramdom_out);
+                console.log("hoan thanh");
+                count++
+                document.title = `Đã chế tạo ${count} lần`;
             }
-            stopProcessing = true;
-            wrapper.className = "toogle-btn auto-water auto-off";
-            wrapper.title = "Click to start auto";
-            document.title = "Đã chế tạo xong!" + loop + " Bánh";
-        }
-        else {
-            while (!stopProcessing && count < loop) {
-                const elements = document.querySelector(
-                    "button.Crafting_craftingButton__Qd6Ke span"
-                );
-                if (elements && !elements.disabled) {
-                    elements.click();
-                    const ramdomTime = getRandomInt(3, 7) * 200
-                    await sleep(watingTime + ramdomTime);
-                    elements.click();
-                    await sleep(ramdomTime);
-                    elements.click();
-                    count += 1
-                    document.title = "Đã chế tạo " + count + " lần";
-                }
-                await sleep(500)
+            if (craftingButton && !craftingButton.disabled && craftingButton.textContent === "Collect") {
+                await clickCraftingButton()
             }
-            stopProcessing = true;
-            wrapper.className = "toogle-btn auto-water auto-off";
-            wrapper.title = "Click to start auto";
-            document.title = "Đã chế tạo " + count + " lần";
+            await sleep(200);
         }
+        stopProcessing = true;
+        wrapper.className = "toogle-btn auto-water auto-off";
+        wrapper.title = "Click to start auto";
+        document.title = "Đã chế tạo xong!" + loop + " Bánh";
     }
 
     function sleep(ms) {
@@ -114,13 +90,6 @@
         wrapper.className = "toogle-btn auto-water";
         parent.append(wrapper);
 
-        const inputNumber = document.createElement("input");
-        inputNumber.setAttribute("type", "number");
-        inputNumber.setAttribute("min", "1");
-        inputNumber.setAttribute("max", "999");
-        inputNumber.className = "auto-input-loop"
-        wrapper.append(inputNumber)
-
         const bookmarkBtn = document.createElement("img");
         bookmarkBtn.src = chrome.runtime.getURL("assets/cooking.png");
         bookmarkBtn.title = "Click to start auto";
@@ -139,7 +108,7 @@
                 const watingTime = timeToMilliseconds(cratingWrapper[7].textContent)
                 console.log("nau mat: ", watingTime)
                 stopProcessing = false;
-                await startAuto(wrapper, inputNumber.value || 0, watingTime);
+                await startAuto(wrapper, watingTime);
             }
         });
     }
