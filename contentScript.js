@@ -46,11 +46,12 @@
             if (craftingButton && !craftingButton.disabled && craftingButton.textContent === "Create") {
                 console.log("tao banh");
                 await clickCraftingButton();
-                ramdom_out = getRandomInt(4, 6) * 1000
-                await sleep(ramdom_out);
+                // ramdom_out = getRandomInt(4, 6) * 1000
+                // await sleep(ramdom_out);
                 // await clickCloseCraftingButton()
-                console.log("doi ", watingTime - ramdom_out + "ms");
-                await sleep(watingTime - ramdom_out);
+                // console.log("doi ", watingTime - ramdom_out + "ms");
+                // await sleep(watingTime - ramdom_out);
+                await sleep(watingTime);
                 console.log("hoan thanh");
                 count++
                 document.title = `Đã chế tạo ${count} lần`;
@@ -58,7 +59,7 @@
             if (craftingButton && !craftingButton.disabled && craftingButton.textContent === "Collect") {
                 await clickCraftingButton()
             }
-            await sleep(200);
+            await sleep(10);
         }
         stopProcessing = true;
         wrapper.className = "toogle-btn auto-water auto-off";
